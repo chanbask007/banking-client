@@ -81,7 +81,9 @@ export default {
             // console.log('transaction data ',this.transactionAmount, this.transactionType)
            try{
                
-        const response = await AuthenticationService.transactions({transactionType:this.transactionType,transactionAmount: this.transactionAmount})       
+        const response = await AuthenticationService.transactions({transactionType:this.transactionType,transactionAmount: parseFloat(this.transactionAmount)})
+        this.transactionAmount = 0.00,
+        this.transactionType = null       
        } catch(error){
            this.error = error.response.data.error
        }
