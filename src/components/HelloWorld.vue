@@ -91,7 +91,12 @@ export default {
         })
         this.$store.dispatch('setToken',response.data.token)
         this.$store.dispatch('setUser',response.data.user)
+        if(this.selected=='customer'){
         this.$router.push({path:'/transactions'})
+        }
+        if(this.selected=='banker'){
+          this.$router.push({path:'users'})
+        }
 
        
        } catch(error){
