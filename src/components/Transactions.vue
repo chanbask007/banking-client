@@ -6,7 +6,7 @@
       <md-table-toolbar>
         <h1 class="md-title">Users Transactions</h1>
       </md-table-toolbar>
-
+    <div v-if="transactionsDetails">
       <md-table-row>
         <md-table-head md-numeric>ID</md-table-head>
         <md-table-head>User Mail</md-table-head>
@@ -19,7 +19,7 @@
         <md-table-cell>{{transaction.transactionType}}</md-table-cell>
         <md-table-cell>{{transaction.transactionAmount}}</md-table-cell>
       </md-table-row>
-
+    </div>
       
     </md-table>
   </div>
@@ -35,6 +35,7 @@
       </md-card>      
 
       <h3><u> Make Transaction</u></h3><br>
+      <span v-if="error" style="color:red">No suffieient funds! </span>
       <b-form-select v-model="transactionType" :options="options">
       <div class="mt-3">Selected: <strong>{{ transactionType }}</strong></div>
       </b-form-select><br><br>
@@ -83,9 +84,10 @@ export default {
                
         const response = await AuthenticationService.transactions({transactionType:this.transactionType,transactionAmount: parseFloat(this.transactionAmount)})
         this.transactionAmount = 0.00,
-        this.transactionType = null       
+        this.transactionType = null,
+        this.getTransactionsDetails()   
        } catch(error){
-           this.error = error.response.data.error
+           this.error = error.response.data.msg
        }
         },
 

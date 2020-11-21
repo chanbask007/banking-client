@@ -3,6 +3,7 @@
   <div style="width:35%;margin-right:auto;margin-left:auto">
     <b-tabs content-class="mt-3" fill>          
     <b-tab title="Login" active>
+      <span v-if="error" style="color:red">{{error}} </span>
       <span style="color:red">{{ errors.first('email') }}</span>
       <b-form-input v-validate="{ required: true, email: true }" type="email" name="email" v-model="loginEmail"  placeholder="Enter email"></b-form-input><br>
       <span style="color:red">{{ errors.first('password') }}</span>      
@@ -12,6 +13,7 @@
 
     </b-tab>
     <b-tab title="Register">
+      <span v-if="error" style="color:red">{{error}} </span>
       <span style="color:red">{{ errors.first('Registration Email') }}</span>
       <b-form-input name="Registration Email" v-validate="{ required: true, email: true }" v-model="registerEmail"  placeholder="Enter email"></b-form-input><br>
       <span style="color:red">{{ errors.first('Registration Password')}}</span>
@@ -29,9 +31,8 @@
       
       </b-tab>
     </b-tabs>
-  </div>
-  
-  
+    
+</div>  
 </template>
 
 <script>
@@ -53,14 +54,17 @@ export default {
         {value:null, text:'Select Role', disabled:true},
         { value: 'customer', text: 'Register as Customer' },
         { value: 'banker', text: 'Register as Banker' }
-      ]
+      ],
+      snackbar: false,
+      text: 'My timeout is set to 2000.',
+      timeout: 2000
 
     }
   },
   methods:{
    async loginUser(){
     //  console.log('user', this.loginEmail, this.loginPassword);
-    
+    try{
     const response = await AuthenticationService.login({
       email: this.loginEmail,
       password: this.loginPassword
@@ -77,6 +81,10 @@ export default {
     if(response.data.user.role == 'banker'){
     localStorage.setItem('token',response.data.token)
     this.$router.push({path:'/users'})
+    }
+    } catch(error){
+      this.error = error.response.data.error
+
     }
 
     },

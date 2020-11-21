@@ -7,13 +7,18 @@ import {BootstrapVue} from 'bootstrap-vue'
 import {sync} from 'vuex-router-sync'
 import store from '@/store/store'
 
+
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
 import VeeValidate from 'vee-validate';
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
 
+
+Vue.use(Vuetify)
 Vue.use(VeeValidate,{
   classes: true,
   classNames: {

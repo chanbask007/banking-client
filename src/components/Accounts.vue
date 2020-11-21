@@ -1,6 +1,6 @@
 <template>
 <div>
-  <h1>Accounts Component</h1>
+  <h1>Accounts Component</h1><b-btn @click="logout" variant="danger">Logout</b-btn>
   <b-btn variant="success" @click="accounts">click</b-btn>
    <div v-if="transactionsData">
       <ul>
@@ -32,6 +32,9 @@ export default {
             }catch(error){
                 this.error = error.response.data.error
             }
+        },
+        logout(){
+            this.$router.push('/')
         }
 
     }
