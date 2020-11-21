@@ -7,7 +7,7 @@
         <md-table-head>Current Balance</md-table-head>
       </md-table-row>
       <md-table-row v-for="user in users" :key="user.id">
-        <md-table-cell><router-link :to="{name:'Users',params: { userId: user.email }}"> {{user.email}}</router-link></md-table-cell>
+        <md-table-cell><router-link :to="{name:'Users'}"> {{user.email}}</router-link></md-table-cell>
         <md-table-cell>{{user.balance}}</md-table-cell>
       </md-table-row>
 
@@ -18,6 +18,7 @@
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
+import AccountService from '@/services/AccountService'
 export default {
 
     name: 'Users',
@@ -25,8 +26,7 @@ export default {
         return {
             
             error: null,
-            users: null,
-            userId: null
+            users: null
 
         }
     },

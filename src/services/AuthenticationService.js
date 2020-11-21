@@ -1,5 +1,6 @@
 import  Api from '@/services/Api'
 import TransactionService from '@/services/TransactionService'
+import AccountService from './AccountService'
 
 export default {
     register(credentials){
@@ -16,6 +17,6 @@ export default {
         return TransactionService().post('accounts')
     },
     getUsers(){
-        return Api().get('users')
+        return AccountService().get('users')
     }
 }

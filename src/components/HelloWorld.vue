@@ -70,10 +70,13 @@ export default {
     // console.log('token ', this.$state.token);
     console.log(response);
     if(response.data.user.role=='customer'){
+    console.log(`the token is ${this.$store.state.token}`);
+    localStorage.setItem('token',response.data.token)
     this.$router.push({path:'/transactions'})
     }
     if(response.data.user.role == 'banker'){
-      this.$router.push({path:'/users'})
+    localStorage.setItem('token',response.data.token)
+    this.$router.push({path:'/users'})
     }
 
     },
