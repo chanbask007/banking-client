@@ -4,6 +4,6 @@ export default()=>{
 
     return axios.create({
         baseURL: `http://localhost:8081`,
-        headers: {'Authorization': `Bearer xyx ${localStorage.getItem('token')}`}
+        headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}
     })
 }
