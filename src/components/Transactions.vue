@@ -6,6 +6,7 @@
       <md-table-toolbar>
         <h1 class="md-title">Users Transactions</h1>
       </md-table-toolbar>
+    <div v-if="!transactionsDetails">NO Transactions!</div>  
     <div v-if="transactionsDetails">
       <md-table-row>
         <md-table-head md-numeric>ID</md-table-head>
@@ -28,7 +29,7 @@
       <md-card>
           <md-card-header>
         <md-card-header-text>
-          <div class="md-title">&#8377; {{$store.state.user.balance}}</div><br>
+          <div class="md-title">&#8377; <span v-if="!updatedBalance">{{$store.state.user.balance}}</span><span v-if="updatedBalance">{{updatedBalance}}</span></div><br>
           <div class="md-subhead"><u>{{$store.state.user.email}}</u></div>
         </md-card-header-text>
           </md-card-header>
@@ -59,6 +60,7 @@ export default {
     data (){
 
         return {
+            updatedBalance: null,
             transactionAmount: null,
             transactionType: null,
             error: null,
@@ -68,7 +70,9 @@ export default {
                 {value:null, text:'Select Transaction Type', disabled:true},
                 { value: 'debit', text: 'Debit from Account'},
                 { value: 'credit', text: 'Deposit to Account' }
-            ]
+            ],
+            customerDetails:null,
+            
             
         }        
     },
@@ -84,8 +88,11 @@ export default {
                
         const response = await AuthenticationService.transactions({transactionType:this.transactionType,transactionAmount: parseFloat(this.transactionAmount)})
         this.transactionAmount = 0.00,
-        this.transactionType = null,
-        this.getTransactionsDetails()   
+        this.transactionType = null,        
+        this.error = null,
+        this.updatedBalance = response.data.customer.updatedBalance
+        console.log(this.updatedBalance);
+        this.getTransactionsDetails()
        } catch(error){
            this.error = error.response.data.msg
        }
@@ -96,7 +103,8 @@ export default {
                 console.log('getTransactions called!');
                 const response = await AuthenticationService.getTransactionsDetails()
                 this.transactionsDetails = response.data.transactions
-                console.log(this.transactionsDetails);
+                this.customerDetails = response.data.customer
+                
                                 
             } catch (error) {
                 this.error = error.response.data.error

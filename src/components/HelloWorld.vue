@@ -99,6 +99,7 @@ export default {
         })
         this.$store.dispatch('setToken',response.data.token)
         this.$store.dispatch('setUser',response.data.user)
+        localStorage.setItem('token',response.data.token)
         if(this.selected=='customer'){
         this.$router.push({path:'/transactions'})
         }
