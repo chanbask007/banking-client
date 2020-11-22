@@ -1,24 +1,28 @@
 <template><div>
   <div style="display:flex">
-   <div style="width:60%;">
+   <div style="width:65%;">
        <div>
     <md-table md-card>
       <md-table-toolbar>
         <h1 class="md-title">Users Transactions</h1>
       </md-table-toolbar>
-    <div v-if="!transactionsDetails">NO Transactions!</div>  
+    <div style="color:red" v-if="!transactionsDetails">No Transactions Found!</div>  
     <div v-if="transactionsDetails">
       <md-table-row>
         <md-table-head md-numeric>ID</md-table-head>
         <md-table-head>User Mail</md-table-head>
         <md-table-head>Credit/Debit</md-table-head>
         <md-table-head>Amount</md-table-head>
+        <md-table-head>Date</md-table-head>
+        <md-table-head>Time</md-table-head>
       </md-table-row>
       <md-table-row v-for="transaction in transactionsDetails" :key="transaction.id">
         <md-table-cell md-numeric>{{transaction.id}}</md-table-cell>
-        <md-table-cell><router-link :to="{name:'Users',params: { userId: transaction.userEmail }}"> {{transaction.userEmail}}</router-link></md-table-cell>
+        <md-table-cell><router-link :to="{name:'Users'}"> {{transaction.userEmail}}</router-link></md-table-cell>
         <md-table-cell>{{transaction.transactionType}}</md-table-cell>
         <md-table-cell>{{transaction.transactionAmount}}</md-table-cell>
+        <md-table-cell>{{transaction.createdAt|moment("DD MMM YY")}}</md-table-cell>
+        <md-table-cell>{{transaction.createdAt|moment("hh:mm A")}}</md-table-cell>
       </md-table-row>
     </div>
       
@@ -76,11 +80,6 @@ export default {
             
         }        
     },
-    computed: {
-      rows() {
-        return this.items.length
-        }
-      },
     methods:{
         async makeTransactions(){
             // console.log('transaction data ',this.transactionAmount, this.transactionType)
@@ -122,6 +121,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.md-table-cell-container {
+    padding: 10px 10px 10px 10px;
+}
 
 </style>

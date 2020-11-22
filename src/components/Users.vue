@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h1>Banker {{bankersData.email}}</h1><b-btn @click="logout" variant="danger">Logout</b-btn>
+      <h1>Banker</h1><b-btn @click="logout" variant="danger">Logout</b-btn>
       <md-table md-card>
       <md-table-row>
         <md-table-head>User Mail</md-table-head>

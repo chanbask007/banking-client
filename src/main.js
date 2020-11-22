@@ -14,11 +14,10 @@ import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
 import VeeValidate from 'vee-validate';
-import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
-
-
-Vue.use(Vuetify)
+import VueMoment from 'vue-moment'
+// import moment from 'moment-timezone'
+ 
+Vue.use(VueMoment)
 Vue.use(VeeValidate,{
   classes: true,
   classNames: {
