@@ -103,7 +103,7 @@ export default {
                 const response = await AuthenticationService.getTransactionsDetails()
                 this.transactionsDetails = response.data.transactions
                 this.customerDetails = response.data.customer
-                
+               
                                 
             } catch (error) {
                 this.error = error.response.data.error

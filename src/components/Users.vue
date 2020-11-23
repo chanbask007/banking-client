@@ -1,6 +1,20 @@
 <template>
-  <div>
-      <h1>Banker</h1><b-btn @click="logout" variant="danger">Logout</b-btn>
+  <div><div>
+      <div style="width:30%;display: inline-block;">
+      <md-card >
+          <md-card-header>
+        <md-card-header-text>
+          <div class="md-title">&#129333;<span style="margin-left:20px" v-if="bankersData">{{bankersData.email}}</span></div>
+          <div class="sub-head" v-if="bankersData"><u>{{bankersData.role}}</u></div>
+        </md-card-header-text>
+          </md-card-header>
+      </md-card>
+      </div>
+      <div>
+      <b-btn @click="logout" variant="danger">Logout</b-btn>
+      </div>
+      </div>
+      <div style="width: 50%;margin-left: auto;margin-right: auto;">
       <md-table md-card>
       <md-table-row>
         <md-table-head>User Mail</md-table-head>
@@ -10,9 +24,9 @@
         <md-table-cell><router-link :to="{ path:'/users', params: { id: 123 }}"> {{user.email}}</router-link></md-table-cell>
         <!-- <router-link :to="{ name: 'Users', params: { id: 123 }}">User</router-link> -->
         <md-table-cell>{{user.balance}}</md-table-cell>
-      </md-table-row>
-      
+      </md-table-row>  
     </md-table>
+    </div>
   </div>
 </template>
 
